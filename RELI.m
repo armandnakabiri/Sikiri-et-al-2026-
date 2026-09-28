@@ -1,31 +1,29 @@
 % =========================================================================
-% ESTIMATION DE LA PROBABILITÉ DE DÉFAILLANCE DU TABLIER D'UN PONT
-% Mode de défaillance : Glissement horizontal (Portance FL négative)
+% ESTIMATION DE LA PROBABILITÉ DE DÉFAILLANCE - MONTE CARLO
 % =========================================================================
 
-clear; clc; close all;
 
 %% 1. PARAMÈTRES ET ENTRÉES
 W = 412020;       % Poids du pont 
 mu = 1.0;         % Coefficient de frottement supposée à 1
 N = 100000;       % Nombre de simulations de Monte Carlo
 
-% Paramètres de la loi GEV (Fréchet) pour FD et FL
-% Note : Sous MATLAB (gevfit/gevrnd), Fréchet correspond à un paramètre de forme k > 0
+% Paramètres de la loi GEV pour FD et FL
+
 k_D = -0.2424; sigma_D = 372373.6993; mu_D = 2786459.5688;     % Traînée FD
 k_L = -1.4310; sigma_L = 5458484.1443; mu_L = -3823149.0403;      % Amplitude de la portance |FL|
 
 %% 2. SIMULATION DE MONTE CARLO
-rng('default'); % Fixer la graine pour la reproductibilité
+rng('default'); % pour la reproductibilité
 
-% Génération des forces de traînée (positives)
+% Génération des forces de traînée 
 FD = gevrnd(k_D, sigma_D, mu_D, [N, 1]);
 
-% Génération des forces de portance (NÉGATIVES)
-% On génère des valeurs positives via la GEV et on applique le signe négatif
+% Génération des forces de portance 
+
 FL = -gevrnd(k_L, sigma_L, mu_L, [N, 1]);
 
-%% 3. ANALYSE DE LA SÉCURITÉ (FONCTION D'ÉTAT LIMITE Z)
+%% 3. ANALYSE DE LA SÉCURITÉ (FONCTION D'ÉTAT LIMITE Z ou G)
 % Formule : Z = mu * (W + |FL|) - FD
 % Défaillance si Z <= 0 (les forces l'emportent sur la résistance)
 Z = mu * (W + abs(FL)) - FD;
