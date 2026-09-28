@@ -1,11 +1,8 @@
 % =========================================================================
 % CALCUL DES CRUES PAR LA METHODE SCS-CN & HYDROGRAMME UNITAIRE (SCS TYPE II)
-% VERSION CORRIGÉE ET OPTIMISÉE (MATLAB)
 % =========================================================================
 
-clear; clc; close all;
-
-% --- 1. Données du bassin versant ---
+% --- 1. Bassin versant ---
 A = 32;          % Superficie (km2)
 CN = 72.95;      % Curve Number
 L = 6712.268;       % Longueur du plus long cours d'eau (m)
@@ -81,7 +78,7 @@ for i = 1:length(P_24h)
     Pe_inc = [Pe_cum(1), diff(Pe_cum)];
     Pe_inc(Pe_inc < 0) = 0;
     
-    % --- CONVOLUTION (CORRIGÉE : Pas de Multiplication par dt ici !) ---
+    % --- CONVOLUTION  ---
     Q_hydro = conv(Pe_inc, HU); 
     Q_hydro = Q_hydro(1:N_sim); % Tronquer à la durée de simulation
     
@@ -98,48 +95,9 @@ for i = 1:length(P_24h)
     box on;          
     grid off;          
     xlim([0 30]);    
-    ylim([0 2000]);    % Réajusté car les vrais débits culminent à ~600 m3/s
+    ylim([0 2000]);   
     
     title(['T = ' num2str(T_retour(i)) ' year'], 'FontSize', 11, 'FontWeight', 'bold');
     xlabel('Time (h)', 'FontSize', 9);
     ylabel('Flow rate (m³/s)', 'FontSize', 9);
-end
-
-% --- 9. ENREGISTREMENT DE L'IMAGE GLOBALE (CORRIGÉ & SÉCURISÉ) ---
-nom_fichier = 'hydrogrammes_BIEN.png';
-chemin_complet = fullfile(pwd, nom_fichier); % Assure l'écriture dans le dossier courant
-
-try
-    % Méthode moderne (recommandée par MATLAB, conserve la haute résolution)
-    exportgraphics(hFig, chemin_complet, 'Resolution', 300);
-    fprintf('\n-> [SUCCÈS] L''image a été enregistrée via exportgraphics : \n   "%s"\n', chemin_complet);
-catch
-    try
-        % Méthode de secours si votre version de MATLAB est ancienne
-        saveas(hFig, chemin_complet);
-        fprintf('\n-> [SUCCÈS] L''image a été enregistrée via saveas : \n   "%s"\n', chemin_complet);
-    catch ME
-        warning('Impossible d''enregistrer la figure automatiquement.');
-        fprintf('Erreur rencontrée : %s\n', ME.message);
-        fprintf('Conseil : Cliquez sur le menu "File -> Save As" de la fenêtre de graphique.\n');
-    end
-end
-% --- 9. ENREGISTREMENT DE L'IMAGE GLOBALE (CORRIGÉ & SÉCURISÉ) ---
-nom_fichier = 'hydrogrammes_BIEN OK.png';
-chemin_complet = fullfile(pwd, nom_fichier); % Assure l'écriture dans le dossier courant
-
-try
-    % Méthode moderne (recommandée par MATLAB, conserve la haute résolution)
-    exportgraphics(hFig, chemin_complet, 'Resolution', 300);
-    fprintf('\n-> [SUCCÈS] L''image a été enregistrée via exportgraphics : \n   "%s"\n', chemin_complet);
-catch
-    try
-        % Méthode de secours si votre version de MATLAB est ancienne
-        saveas(hFig, chemin_complet);
-        fprintf('\n-> [SUCCÈS] L''image a été enregistrée via saveas : \n   "%s"\n', chemin_complet);
-    catch ME
-        warning('Impossible d''enregistrer la figure automatiquement.');
-        fprintf('Erreur rencontrée : %s\n', ME.message);
-        fprintf('Conseil : Cliquez sur le menu "File -> Save As" de la fenêtre de graphique.\n');
-    end
 end
