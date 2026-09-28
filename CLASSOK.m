@@ -1,4 +1,4 @@
-% 1. Données à représenter
+% 1. Données 
 categories = {'Vegetation', 'Bare soil', 'Buildings', 'Water bodies'};
 pourcentages = [61.89, 34.28, 2.73, 1.08];
 
@@ -10,27 +10,27 @@ couleurs = [
     0.12, 0.53, 0.90   % Water bodies (Bleu de la carte)
 ];
 
-% 3. Création de la figure
-figure('Color', [1 1 1]); % Fond de la fenêtre en blanc
+% 3. figure
+figure('Color', [1 1 1]); 
 
 % 4. Dessin du diagramme en barres
 hBar = bar(pourcentages, 'EdgeColor', 'k', 'LineWidth', 1);
 set(gca, 'XTickLabel', categories, 'XColor', 'k', 'YColor', 'k');
 
-% Application de la palette personnalisée à chaque barre
+% palette personnalisée à chaque barre
 hBar.FaceColor = 'flat';
 hBar.CData = couleurs;
 
-% 5. Personnalisation des axes et labels (style épuré comme votre image)
+% 5. Personnalisation des axes et labels 
 ylabel('Landuse (%)', 'FontSize', 11, 'Color', 'k');
 xlabel('Main types of occupation in Kavimvira Watershed', 'FontSize', 11, 'Color', 'k');
-ylim([0 100]); % Limite l'axe Y de 0 à 100%
-set(gca, 'YTick', 0:10:100); % Graduations de 10 en 10
-grid off; % Pas de quadrillage arrière
+ylim([0 100]); 
+set(gca, 'YTick', 0:10:100); 
+grid off; 
 
-% 6. Ajout automatique des étiquettes de texte (%) au-dessus des barres
+% 6. étiquettes de texte 
 xtips = 1:numel(pourcentages);
-ytips = pourcentages + 2; % Positionne le texte légèrement au-dessus de la barre
+ytips = pourcentages + 2;
 labels = cellstr(num2str(pourcentages', '%.2f%%'));
 text(xtips, ytips, labels, 'HorizontalAlignment', 'center', ...
     'VerticalAlignment', 'bottom', 'FontSize', 9, 'FontWeight', 'bold');
