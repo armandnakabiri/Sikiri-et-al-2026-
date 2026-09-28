@@ -1,5 +1,5 @@
 % =========================================================================
-% HYETOGRAMMES DE PLUIE SCS TYPE II EN SUBPLOTS (CORRIGÉ & OPTIMISÉ)
+% HYETOGRAMMES DE PLUIE SCS TYPE II EN SUBPLOTS 
 % =========================================================================
 
 
@@ -44,17 +44,12 @@ for i = 1:length(P_24h)
     
     % Configuration des axes
     box on; 
-    grid off; % Activé pour une meilleure lecture des pics
+    grid off; 
     xlim([0 24]); 
-    ylim([0 500]); % Augmenté légèrement pour ne pas étouffer le graphe T=1000
+    ylim([0 500]);
     
     % Titres et labels
     title(['T = ' num2str(T_retour(i)) ' year'], 'FontSize', 12, 'FontWeight', 'bold');
     xlabel('Time (h)', 'FontSize', 10);
     ylabel('Intensity (mm/h)', 'FontSize', 10);
 end
-
-% --- 6. Enregistrement Haute Résolution ---
-% exportgraphics est plus performant que saveas pour conserver la mise en page
-exportgraphics(hFig, 'hyetogrammesBIEN OK.png', 'Resolution', 300);
-fprintf('\n-> L''image haute résolution a été enregistrée : "hyetogrammesBIEN OK.png"\n');
