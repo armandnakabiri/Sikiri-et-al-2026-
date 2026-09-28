@@ -6,11 +6,11 @@
 nom_fichier = 'C:\Users\HP\Documents\MX.xlsx';
 donnees_brutes = readmatrix(nom_fichier);
 
-% Extraction sous forme de vecteur colonne (en enlevant les éventuels NaN)
+% Extraction sous forme de vecteur colonne 
 donnees_chronologiques = donnees_brutes(~isnan(donnees_brutes));
 n = length(donnees_chronologiques);
 
-% Tri des données pour les fonctions de répartition (CDF)
+% Tri des données pour les fonctions de répartition
 data = sort(donnees_chronologiques);
 
 % 2. AJUSTEMENT DES DISTRIBUTIONS
