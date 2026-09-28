@@ -1,6 +1,6 @@
 % 1. Chargement des données depuis le fichier Excel
 
-nom_fichier = 'C:\Users\HP\Documents\PFL.xlsx'; 
+nom_fichier = 'C:\Users\HP\Documents\MX.xlsx'; 
 
 try
     % readmatrix importe automatiquement la première colonne numérique
@@ -42,7 +42,7 @@ figure;
 histogram(donnees_pluie, 'Normalization', 'pdf', 'FaceColor', [0.7 0.8 1], 'EdgeColor', 'w');
 hold on;
 
-% Génération des points pour tracer la courbe théorique
+% courbe théorique
 x_axe = linspace(min(donnees_pluie)*0.8, max(donnees_pluie)*1.2, 200);
 y_frechet = gevpdf(x_axe, k_est, sigma_est, mu_est);
 
