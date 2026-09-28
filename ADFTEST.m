@@ -1,9 +1,8 @@
 % 1. Importation des données depuis le fichier Excel
-nomFichier = 'C:\Users\HP\Documents\MX.xlsx'; % Vérifiez bien l'extension (.xlsx ou .xls)
+nomFichier = 'C:\Users\HP\Documents\MX.xlsx'; 
 donnees = readtable(nomFichier);
 
-% 2. Extraction automatique de la TOUTE PREMIÈRE colonne
-% Le format donnees{:, 1} extrait les valeurs numériques directement
+% 2. Extraction PREMIÈRE colonne
 y = donnees{:, 1}; 
 
 % 3. Application du test de Dickey-Fuller Augmenté (ADF)
