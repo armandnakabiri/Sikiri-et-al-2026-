@@ -2,8 +2,8 @@
 
 nomFichier = 'C:\Users\HP\Documents\DATACRH.xlsx'; 
 X = readmatrix(nomFichier); 
-X = X(:, 1); % Sélection de la première colonne
-X = X(~isnan(X)); % Suppression des éventuelles valeurs vides (NaN)
+X = X(:, 1); 
+X = X(~isnan(X)); 
 N = length(X);
 
 fprintf('--- Analyse de la série (N = %d données) ---\n', N);
@@ -18,7 +18,7 @@ for i = 1:(N-1)
     end
 end
 
-% Calcul de la variance de S (sans correction pour ex-aequo ici)
+% Calcul de la variance de S 
 VarS = (N * (N - 1) * (2 * N + 5)) / 18;
 
 % Calcul de la statistique Z
