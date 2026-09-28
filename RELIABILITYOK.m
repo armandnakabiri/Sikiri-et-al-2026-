@@ -1,11 +1,9 @@
+%ESTIMATION DE LA FIABILITE AVEC WEIBULL
 
-%% FIABILITE WEIBULL - 6 ALPHA x 4 LAMBDA - VERSION FINALE
-clear; clc; close all;
-
-% --- TU MODIFIES ICI ---
-alphas = [4545.85608, 1622.12987,891.80796, 643.84811, 531.55829, 420.73470]; % << TES 6 ALPHA
-gammas = [1.0, 2.5, 3.5, 4.5]; % << TES 4 LAMBDA
-seuils = [2354.71366, 2630.26631, 2850.13061, 3016.60800,3147.44063, 3587.22263]; % 6 seuils, un par alpha
+% --- Parametres---
+alphas = [4545.85608, 1622.12987,891.80796, 643.84811, 531.55829, 420.73470]; 
+gammas = [1.0, 2.5, 3.5, 4.5]; 
+seuils = [2354.71366, 2630.26631, 2850.13061, 3016.60800,3147.44063, 3587.22263]; 
 temps = 0:1:2400;
 
 couleurs = {'#0072BD','#D95319','#EDB120','#7E2F8E','#77AC30','#A2142F'};
@@ -22,7 +20,7 @@ for i = 1:length(gammas)
     end
 end
 
-% FIGURE 1 : FIABILITE R(t) - 4 subplots avec en-tete lambda
+% FIGURE 1 : FIABILITE R(t) 
 figure('Color','w','Position',[50 50 1300 900]);
 t = tiledlayout(2,2,'TileSpacing','compact','Padding','compact');
 
