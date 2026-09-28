@@ -1,15 +1,11 @@
-% 1. Chargement des données depuis le fichier Excel
+% 1. Chargement des données
 
 nom_fichier = 'C:\Users\HP\Documents\MX.xlsx'; 
 
 try
-    % readmatrix importe automatiquement la première colonne numérique
+    
     donnees_pluie = readmatrix(nom_fichier);
-    
-    % Nettoyage : supprime les valeurs manquantes (NaN) si le fichier en contient
     donnees_pluie = donnees_pluie(~isnan(donnees_pluie));
-    
-    % Forcer le format en vecteur colonne
     donnees_pluie = donnees_pluie(:);
     
     fprintf('Succès : %d données de pluie chargées depuis %s.\n\n', length(donnees_pluie), nom_fichier);
